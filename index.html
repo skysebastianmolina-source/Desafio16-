@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>¿Eres del 16%? — Desafío OCDE · Crédito en Túquerres</title>
+  <meta name="description" content="Responde las 3 preguntas de la OCDE sobre alfabetización financiera. Solo el 16% de los colombianos las responde todas bien." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple-50: #EEEDFE;
+      --purple-100: #CECBF6;
+      --purple-200: #AFA9EC;
+      --purple-400: #7F77DD;
+      --purple-600: #534AB7;
+      --purple-800: #3C3489;
+      --purple-900: #26215C;
+      --green-50: #EAF3DE;
+      --green-600: #3B6D11;
+      --green-800: #27500A;
+      --green-border: #639922;
+      --red-50: #FCEBEB;
+      --red-600: #A32D2D;
+      --red-800: #501313;
+      --amber-400: #BA7517;
+      --gray-200: #B4B2A9;
+      --gray-400: #888780;
+      --bg: #f5f4f0;
+      --surface: #ffffff;
+      --surface2: #f1efe8;
+      --text: #1a1a18;
+      --text2: #5f5e5a;
+      --text3: #888780;
+      --border: rgba(0,0,0,0.12);
+      --border2: rgba(0,0,0,0.22);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a18;
+        --surface: #242422;
+        --surface2: #2c2c2a;
+        --text: #f0ede6;
+        --text2: #b4b2a9;
+        --text3: #5f5e5a;
+        --border: rgba(255,255,255,0.10);
+        --border2: rgba(255,255,255,0.18);
+        --purple-50: #26215C;
+        --purple-100: #3C3489;
+        --purple-200: #534AB7;
+        --purple-800: #CECBF6;
+        --purple-900: #EEEDFE;
+        --green-50: #173404;
+        --green-800: #C0DD97;
+        --green-border: #3B6D11;
+        --red-50: #501313;
+        --red-800: #F7C1C1;
+        --red-600: #F09595;
+      }
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5rem 1rem 4rem;
+    }
+
+    .container { width: 100%; max-width: 560px; }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      font-size: 13px;
+      color: var(--text3);
+    }
+
+    .top-bar strong { color: var(--text2); font-weight: 500; }
+
+    .hero {
+      background: var(--purple-50);
+      border-radius: var(--radius-xl);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-pct {
+      font-size: 80px;
+      font-weight: 600;
+      color: var(--purple-800);
+      line-height: 1;
+    }
+
+    .hero-sub { font-size: 15px; color: var(--purple-600); margin: 0.5rem 0 0.25rem; line-height: 1.5; }
+    .hero-desc { font-size: 12px; color: var(--purple-600); opacity: 0.8; }
+
+    .card {
+      background: var(--surface);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-title { font-size: 18px; font-weight: 500; margin-bottom: 0.5rem; }
+
+    .card-desc { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 1.25rem; }
+
+    label { display: block; font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 15px;
+      font-family: inherit;
+      border: 0.5px solid var(--border2);
+      border-radius: var(--radius-md);
+      background: var(--surface2);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--purple-400);
+      box-shadow: 0 0 0 3px var(--purple-50);
+    }
+
+    .btn-primary {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.8rem;
+      background: var(--purple-400);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 15px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--purple-600); }
+
+    .btn-outline {
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--purple-400);
+      background: transparent;
+      color: var(--purple-400);
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-outline:hover { background: var(--purple-50); }
+
+    .btn-secondary {
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius-md);
+      border: none;
+      background: var(--purple-400);
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn-secondary:hover { background: var(--purple-600); }
+
+    .progress-row { display: flex; gap: 6px; margin-bottom: 1rem; }
+    .progress-seg { flex: 1; height: 4px; border-radius: 99px; background: var(--border); transition: background 0.3s; }
+    .progress-seg.done { background: var(--purple-400); }
+    .progress-seg.active { background: var(--purple-200); }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .timer { font-size: 16px; font-weight: 500; color: var(--purple-600); }
+
+    .q-step { font-size: 11px; font-weight: 500; color: var(--purple-400); letter-spacing: 0.06em; margin-bottom: 0.4rem; text-transform: uppercase; }
+
+    .q-pill {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: var(--purple-50);
+      color: var(--purple-800);
+      margin-bottom: 0.75rem;
+    }
+
+    .q-text { font-size: 16px; font-weight: 500; line-height: 1.6; margin-bottom: 0.75rem; }
+
+    .q-context {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      background: var(--surface2);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.25rem;
+    }
+
+    .opts { display: flex; flex-direction: column; gap: 8px; }
+
+    .opt {
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      border: 0.5px solid var(--border2);
+      background: var(--surface2);
+      cursor: pointer;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      text-align: left;
+      transition: background 0.12s, border-color 0.12s;
+    }
+
+    .opt:hover:not(:disabled) { background: var(--bg); border-color: var(--border2); }
+    .opt:disabled { cursor: default; }
+    .opt.correct { background: var(--green-50); border-color: var(--green-border); color: var(--green-800); }
+    .opt.wrong { background: var(--red-50); border-color: var(--red-600); color: var(--red-800); }
+    .opt.reveal { background: var(--green-50); border-color: var(--green-border); color: var(--green-800); }
+
+    .feedback {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .feedback.ok { background: var(--green-50); border: 0.5px solid var(--green-border); color: var(--green-800); }
+    .feedback.fail { background: var(--red-50); border: 0.5px solid var(--red-600); color: var(--red-800); }
+
+    .next-btn {
+      margin-top: 1rem;
+      padding: 0.6rem 1.25rem;
+      background: var(--purple-400);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    .next-btn:hover { background: var(--purple-600); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem; }
+
+    .stat {
+      background: var(--surface2);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .stat-n { font-size: 24px; font-weight: 500; }
+    .stat-l { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+    .action-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 6px;
+      border-bottom: 0.5px solid var(--border);
+      font-size: 14px;
+      border-radius: var(--radius-md);
+    }
+
+    .lb-row:last-child { border-bottom: none; }
+    .lb-row.me { background: var(--purple-50); }
+    .lb-rank { font-size: 18px; font-weight: 500; color: var(--purple-400); min-width: 28px; }
+    .lb-name { flex: 1; }
+    .lb-score { font-weight: 500; }
+    .lb-time { font-size: 12px; color: var(--text3); }
+    .lb-badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; background: var(--purple-50); color: var(--purple-800); margin-left: 4px; }
+
+    .lb-title {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .no-entries { font-size: 13px; color: var(--text3); text-align: center; padding: 1rem 0; }
+
+    .result-icon { font-size: 52px; margin-bottom: 0.75rem; }
+    .result-title { font-size: 20px; font-weight: 500; margin-bottom: 0.5rem; }
+    .result-sub { font-size: 14px; color: var(--text2); line-height: 1.7; margin-bottom: 1.5rem; }
+
+    footer {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <div class="top-bar">
+    <span>Investigación I · Universidad de Nariño · Sede Túquerres</span>
+  </div>
+
+  <div class="hero">
+    <div class="hero-pct">16%</div>
+    <div class="hero-sub">de los colombianos responde correctamente<br>las 3 preguntas básicas de la OCDE</div>
+    <div class="hero-desc">Encuesta Nacional de Capacidades Financieras · Banco Mundial 2013</div>
+  </div>
+
+  <div id="main"></div>
+
+  <footer>
+    Actividad complementaria al anteproyecto<br>
+    <strong>Caracterización de las dinámicas de uso del crédito en las familias del municipio de Túquerres · 2026</strong><br>
+    Programa Administración de Empresas · FACEA · Universidad de Nariño
+  </footer>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'ocde_tuquerres_v1';
+
+const pool = [
+  [
+    {
+      concept: "Interés compuesto",
+      text: "Tienes $100.000 en una cuenta con tasa del 2% anual. Sin retirar ni depositar nada, ¿cuánto tendrás después de 5 años?",
+      context: "El interés compuesto se acumula sobre el capital más los intereses anteriores, no solo sobre el monto inicial.",
+      options: ["Exactamente $110.000", "Más de $110.000", "Menos de $110.000", "Exactamente $100.000"],
+      correct: 1,
+      fb_ok: "Correcto. Con interés compuesto cada año ganas interés sobre lo acumulado. Al cabo de 5 años tendrías $110.408, ligeramente más que $110.000.",
+      fb_fail: "La respuesta es más de $110.000. El interés compuesto hace que cada año ganes interés sobre los intereses anteriores. Después de 5 años tendrías $110.408."
+    },
+    {
+      concept: "Interés compuesto",
+      text: "Depositas $200.000 en un banco con una tasa de interés del 3% anual. No mueves el dinero. ¿Cuánto habrá acumulado después de 3 años?",
+      context: "Cuando el interés se capitaliza anualmente, cada año el banco calcula el interés sobre el nuevo total, no solo sobre los $200.000 originales.",
+      options: ["Exactamente $218.000", "Menos de $218.000", "Más de $218.000", "Exactamente $200.000"],
+      correct: 2,
+      fb_ok: "Exacto. Con interés compuesto al 3% anual, después de 3 años tendrías $218.545 — más que los $218.000 que daría el interés simple.",
+      fb_fail: "La respuesta correcta es más de $218.000. Con interés compuesto al 3% anual, después de 3 años tendrías $218.545 porque cada año el interés se calcula sobre el total acumulado."
+    },
+    {
+      concept: "Interés compuesto",
+      text: "Guardas $500.000 en una cuenta que paga el 5% anual. Después de 2 años sin mover el dinero, ¿tendrás exactamente $550.000?",
+      context: "La diferencia entre interés simple e interés compuesto está en si el banco calcula el interés sobre el capital original o sobre el saldo acumulado.",
+      options: ["Sí, exactamente $550.000", "No, tendré menos de $550.000", "No, tendré más de $550.000", "Depende del banco"],
+      correct: 2,
+      fb_ok: "Correcto. Con interés compuesto tendrías $551.250, no exactamente $550.000, porque en el segundo año el 5% se aplica sobre $525.000 y no sobre los $500.000 originales.",
+      fb_fail: "No, tendrías más de $550.000. Con interés compuesto el segundo año el 5% se aplica sobre $525.000 acumulados, dando un total de $551.250."
+    },
+    {
+      concept: "Interés compuesto",
+      text: "Una cooperativa ofrece el 4% anual sobre tus ahorros. Depositas $150.000 y los dejas 4 años. ¿Cuánto tendrás al final?",
+      context: "Con interés compuesto, el rendimiento crece más rápido que con interés simple porque los intereses generados también generan intereses.",
+      options: ["$174.000 exactos", "Menos de $174.000", "Más de $174.000", "Siempre depende de la inflación"],
+      correct: 2,
+      fb_ok: "Correcto. Al 4% anual compuesto durante 4 años tendrías $175.491 — más que los $174.000 del interés simple, porque los intereses de cada año también generan intereses.",
+      fb_fail: "La respuesta es más de $174.000. Al 4% compuesto anual durante 4 años el total sería $175.491, porque los intereses acumulados también generan nuevos intereses."
+    }
+  ],
+  [
+    {
+      concept: "Inflación y poder adquisitivo",
+      text: "Tienes $1.000.000 guardados en efectivo. La inflación anual es del 5%. Después de un año, ¿cuánto podrás comprar con ese dinero?",
+      context: "La inflación sube los precios de los bienes y servicios, así que aunque tengas el mismo número de billetes, tu dinero vale menos en términos reales.",
+      options: ["Más que hoy, porque sigo teniendo $1.000.000", "Lo mismo que hoy", "Menos que hoy", "Depende del banco donde lo guarde"],
+      correct: 2,
+      fb_ok: "Exacto. Con una inflación del 5%, tus $1.000.000 solo podrán comprar lo equivalente a $952.381 de hoy. El dinero en efectivo pierde valor real con el tiempo.",
+      fb_fail: "La respuesta es menos que hoy. Con inflación del 5% los precios suben, entonces aunque tengas $1.000.000 en billetes, ese dinero alcanza para comprar menos que antes."
+    },
+    {
+      concept: "Inflación y poder adquisitivo",
+      text: "Un kilo de papa cuesta hoy $3.000. Si la inflación anual es del 8%, ¿cuánto costará aproximadamente ese kilo el próximo año?",
+      context: "La inflación representa el aumento general de precios en la economía. Si la inflación es del 8%, los precios suben en promedio un 8% en un año.",
+      options: ["$3.000, el precio no cambia", "Alrededor de $2.760", "Alrededor de $3.240", "Exactamente $3.800"],
+      correct: 2,
+      fb_ok: "Correcto. Con inflación del 8%, el kilo de papa pasaría de $3.000 a aproximadamente $3.240. Eso significa que con el mismo dinero puedes comprar menos.",
+      fb_fail: "La respuesta correcta es alrededor de $3.240. Con inflación del 8% los precios suben ese porcentaje, entonces $3.000 × 1.08 = $3.240."
+    },
+    {
+      concept: "Inflación y poder adquisitivo",
+      text: "Tu abuela guarda $2.000.000 debajo del colchón durante 3 años. La inflación promedio es del 6% anual. ¿Qué pasa con el poder adquisitivo de ese dinero?",
+      context: "El dinero guardado en efectivo no genera rendimiento, pero sí pierde valor real cuando hay inflación, porque los precios siguen subiendo.",
+      options: ["Aumenta, porque el dinero sigue ahí intacto", "Se mantiene igual", "Disminuye, porque los precios han subido", "Depende de cuánto gaste"],
+      correct: 2,
+      fb_ok: "Correcto. Aunque los $2.000.000 siguen físicamente ahí, después de 3 años al 6% de inflación su poder de compra equivale a solo $1.679.240 de hoy. Guardar dinero en efectivo tiene un costo invisible.",
+      fb_fail: "Disminuye. Aunque el dinero está intacto físicamente, los precios subieron un 6% cada año durante 3 años. Con $2.000.000 ahora compras mucho menos que antes."
+    },
+    {
+      concept: "Inflación y poder adquisitivo",
+      text: "Un trabajador gana $1.500.000 mensuales y no recibe aumento de salario. La inflación del año fue del 10%. ¿Qué le pasó a su salario en términos reales?",
+      context: "El salario real mide cuántos bienes y servicios puede comprar alguien con su ingreso. Si los precios suben más que el salario, el poder adquisitivo cae.",
+      options: ["Subió, porque sigue ganando $1.500.000", "Se mantuvo igual", "Bajó, porque los precios subieron más que su salario", "Solo baja si le descuentan impuestos"],
+      correct: 2,
+      fb_ok: "Correcto. Aunque recibe los mismos $1.500.000, con una inflación del 10% esos pesos compran menos. Su salario real equivale ahora a unos $1.363.636 del año anterior.",
+      fb_fail: "Bajó en términos reales. Recibe los mismos billetes pero los precios subieron 10%, entonces su capacidad de compra disminuyó. Es como si le hubieran bajado el sueldo sin decírselo."
+    }
+  ],
+  [
+    {
+      concept: "Diversificación del riesgo",
+      text: "Una persona invierte todos sus ahorros en acciones de una sola empresa. ¿Es esto más seguro o más riesgoso que repartir el dinero entre varias empresas?",
+      context: "Diversificar significa distribuir el dinero en distintas inversiones para que, si una falla, las otras compensen la pérdida.",
+      options: ["Más seguro, porque concentra el control", "Igual de seguro", "Más riesgoso, porque si esa empresa quiebra pierde todo", "Más seguro si la empresa es grande"],
+      correct: 2,
+      fb_ok: "Correcto. Concentrar todo en una sola empresa es más riesgoso. Si tiene problemas, se pierde todo el capital. Diversificar reduce ese riesgo significativamente.",
+      fb_fail: "Es más riesgoso. Si la empresa quiebra o tiene crisis graves, se pierde la totalidad de los ahorros. Repartir el dinero entre varias opciones protege el patrimonio."
+    },
+    {
+      concept: "Diversificación del riesgo",
+      text: "Una familia de Túquerres guarda todos sus ahorros en una sola cooperativa del municipio. ¿Qué riesgo corre comparado con repartir los ahorros entre varias entidades?",
+      context: "Concentrar el dinero en un solo lugar, aunque sea confiable, expone a perderlo todo si esa entidad tiene problemas financieros o cierra.",
+      options: ["Ningún riesgo adicional, las cooperativas son seguras", "Menor riesgo, porque es más fácil de controlar", "Mayor riesgo, porque si la cooperativa falla pierde todos sus ahorros", "Es indiferente, el riesgo es el mismo"],
+      correct: 2,
+      fb_ok: "Correcto. Aunque la cooperativa sea confiable, concentrar todos los ahorros en un solo lugar es más riesgoso. Si la entidad tiene problemas, la familia pierde todo.",
+      fb_fail: "Mayor riesgo. Si esa cooperativa tiene problemas financieros o cierra, la familia perdería todos sus ahorros. Distribuirlos entre varias entidades protege mejor el patrimonio."
+    },
+    {
+      concept: "Diversificación del riesgo",
+      text: "Un agricultor siembra únicamente papa en toda su parcela. Otro siembra papa, maíz y frijol. Si la cosecha de papa se pierde por una helada, ¿cuál queda en mejor situación?",
+      context: "El principio de diversificación aplica tanto a inversiones financieras como a actividades productivas: no depender de una sola fuente protege ante imprevistos.",
+      options: ["El primero, porque se especializó", "Ambos quedan igual", "El segundo, porque tiene otras cosechas que compensan", "Depende del tamaño de la parcela"],
+      correct: 2,
+      fb_ok: "Correcto. El agricultor que diversificó sus cultivos sigue teniendo ingresos por el maíz y el frijol aunque la papa se pierda. El principio es el mismo en las finanzas: no poner todos los huevos en una sola canasta.",
+      fb_fail: "El segundo agricultor queda mejor. Al tener maíz y frijol además de papa, la pérdida de una cosecha no lo deja sin ingresos. Lo mismo aplica al dinero: diversificar protege ante imprevistos."
+    },
+    {
+      concept: "Diversificación del riesgo",
+      text: "Una persona tiene $3.000.000 y los pone todos en un fondo de criptomonedas. Un amigo le dice que es mejor repartirlos entre ese fondo, una cuenta de ahorros y un CDT. ¿Quién tiene razón?",
+      context: "Las criptomonedas son activos de alto riesgo. Combinar opciones de diferente nivel de riesgo protege el patrimonio ante pérdidas extremas.",
+      options: ["La persona, porque puede ganar más concentrado", "Ambas opciones son igual de seguras", "El amigo, porque distribuir reduce el riesgo total", "Ninguno, lo mejor es guardar en efectivo"],
+      correct: 2,
+      fb_ok: "El amigo tiene razón. Repartir entre criptomonedas, una cuenta de ahorros y un CDT equilibra el riesgo. Si las criptomonedas caen, los otros dos activos protegen parte del capital.",
+      fb_fail: "El amigo tiene razón. Concentrar todo en criptomonedas puede generar grandes ganancias, pero también pérdidas totales. Distribuir entre opciones de distinto riesgo protege mejor los ahorros."
+    }
+  ]
+];
+
+const STORAGE_KEY_LB = 'ocde_tuquerres_v1';
+let state = 'name';
+let playerName = '';
+let selectedQ = [];
+let current = 0;
+let score = 0;
+let answered = false;
+let startTime = 0;
+let elapsed = 0;
+let timerInterval = null;
+let myEntryIdx = -1;
+
+function pick() {
+  return pool.map(g => g[Math.floor(Math.random() * g.length)]);
+}
+
+function getLb() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY_LB) || '[]'); } catch(e) { return []; }
+}
+
+function saveLb(name, sc, secs) {
+  try {
+    let lb = getLb();
+    lb.push({ name, score: sc, secs, ts: Date.now() });
+    lb.sort((a, b) => b.score - a.score || a.secs - b.secs);
+    lb = lb.slice(0, 30);
+    localStorage.setItem(STORAGE_KEY_LB, JSON.stringify(lb));
+    myEntryIdx = lb.findIndex(e => e.name === name && e.secs === secs);
+  } catch(e) {}
+}
+
+function fmt(s) {
+  const m = Math.floor(s / 60), sec = s % 60;
+  return m > 0 ? m + 'm ' + sec + 's' : sec + 's';
+}
+
+function render() {
+  const m = document.getElementById('main');
+  if (state === 'name') renderName(m);
+  else if (state === 'quiz') renderQuiz(m);
+  else if (state === 'result') renderResult(m);
+  else if (state === 'leaderboard') renderLeaderboard(m);
+}
+
+function lbPreview() {
+  const lb = getLb();
+  if (!lb.length) return '<div class="no-entries"><i class="ti ti-trophy" style="font-size:18px;vertical-align:-3px;margin-right:6px"></i>Sé el primero en el ranking</div>';
+  return '<div class="lb-title"><i class="ti ti-trophy" style="font-size:16px;color:' + 'var(--amber-400)' + '"></i>Ranking del día</div>' +
+    lb.slice(0, 5).map(function(e, i) {
+      return '<div class="lb-row">' +
+        '<div class="lb-rank">' + (i + 1) + '</div>' +
+        '<div class="lb-name">' + e.name + (e.score === 3 ? '<span class="lb-badge">16%</span>' : '') + '</div>' +
+        '<div class="lb-score">' + e.score + '/3</div>' +
+        '<div class="lb-time">' + fmt(e.secs) + '</div>' +
+      '</div>';
+    }).join('');
+}
+
+function renderName(m) {
+  m.innerHTML =
+    '<div class="card">' +
+      '<div class="card-title">¿Eres del 16%?</div>' +
+      '<div class="card-desc">Responde las 3 preguntas que la OCDE usa para medir la alfabetización financiera en el mundo. Solo el 16% de los colombianos las responde todas bien. Cada jugador recibe una combinación diferente de preguntas.</div>' +
+      '<label for="pname">Tu nombre o apodo para el ranking</label>' +
+      '<input type="text" id="pname" placeholder="Ej: Estudiante anónimo" maxlength="24" />' +
+      '<button class="btn-primary" onclick="startQuiz()">Comenzar el desafío</button>' +
+    '</div>' +
+    '<div class="card">' + lbPreview() + '</div>';
+  var inp = document.getElementById('pname');
+  inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') startQuiz(); });
+}
+
+function startQuiz() {
+  var inp = document.getElementById('pname');
+  playerName = (inp && inp.value.trim()) ? inp.value.trim() : 'Anónimo';
+  selectedQ = pick();
+  current = 0; score = 0; answered = false;
+  startTime = Date.now();
+  state = 'quiz';
+  render();
+}
+
+function renderQuiz(m) {
+  var q = selectedQ[current];
+  var segs = selectedQ.map(function(_, i) {
+    var cls = i < current ? 'done' : i === current ? 'active' : '';
+    return '<div class="progress-seg ' + cls + '"></div>';
+  }).join('');
+  m.innerHTML =
+    '<div class="meta-row">' +
+      '<span>Jugando como: <strong>' + playerName + '</strong></span>' +
+      '<span>Tiempo: <span class="timer" id="tdsp">0s</span></span>' +
+    '</div>' +
+    '<div class="progress-row">' + segs + '</div>' +
+    '<div class="card">' +
+      '<div class="q-step">Pregunta ' + (current + 1) + ' de 3</div>' +
+      '<span class="q-pill">' + q.concept + '</span>' +
+      '<div class="q-text">' + q.text + '</div>' +
+      '<div class="q-context">' + q.context + '</div>' +
+      '<div class="opts" id="opts">' +
+        q.options.map(function(o, i) {
+          return '<button class="opt" onclick="choose(' + i + ')" id="opt' + i + '">' + o + '</button>';
+        }).join('') +
+      '</div>' +
+      '<div id="fb"></div>' +
+      '<div id="nxt"></div>' +
+    '</div>';
+
+  clearInterval(timerInterval);
+  timerInterval = setInterval(function() {
+    var el = document.getElementById('tdsp');
+    if (el) el.textContent = fmt(Math.floor((Date.now() - startTime) / 1000));
+  }, 1000);
+}
+
+function choose(idx) {
+  if (answered) return;
+  answered = true;
+  clearInterval(timerInterval);
+  var q = selectedQ[current];
+  var opts = document.querySelectorAll('.opt');
+  opts.forEach(function(b) { b.disabled = true; });
+  var ok = idx === q.correct;
+  if (ok) score++;
+  opts[idx].className = 'opt ' + (ok ? 'correct' : 'wrong');
+  if (!ok) opts[q.correct].className = 'opt reveal';
+  document.getElementById('fb').innerHTML =
+    '<div class="feedback ' + (ok ? 'ok' : 'fail') + '"><strong>' +
+    (ok ? 'Correcto — ' : 'No exactamente — ') + '</strong>' +
+    (ok ? q.fb_ok : q.fb_fail) + '</div>';
+  document.getElementById('nxt').innerHTML =
+    '<button class="next-btn" onclick="nextQ()">' +
+    (current === 2 ? 'Ver mi resultado' : 'Siguiente pregunta →') + '</button>';
+}
+
+function nextQ() {
+  current++;
+  answered = false;
+  if (current >= 3) {
+    elapsed = Math.floor((Date.now() - startTime) / 1000);
+    saveLb(playerName, score, elapsed);
+    state = 'result';
+  }
+  render();
+}
+
+function renderResult(m) {
+  var perfect = score === 3, good = score === 2;
+  var icon = perfect ? 'ti-trophy' : good ? 'ti-star' : 'ti-refresh';
+  var color = perfect ? '#BA7517' : good ? 'var(--purple-400)' : 'var(--gray-400)';
+  var title = perfect ? '¡' + playerName + ', eres del 16%!' : good ? 'Casi lo logras, ' + playerName : 'Sigue practicando, ' + playerName;
+  var sub = perfect
+    ? 'Respondiste las 3 preguntas correctamente en ' + fmt(elapsed) + '. Perteneces al grupo selecto que la OCDE considera financieramente alfabetizado. Menos del 16% de los colombianos lo logra.'
+    : good
+    ? 'Respondiste 2 de 3 correctamente en ' + fmt(elapsed) + '. Estás por encima del promedio colombiano, pero aún hay un concepto por dominar para entrar al 16%.'
+    : 'Respondiste ' + score + ' de 3. No te desanimes — el 84% de los colombianos tampoco las responde todas bien. Vuelve a intentarlo con una nueva combinación de preguntas.';
+
+  m.innerHTML =
+    '<div class="card" style="text-align:center;padding:2rem 1.5rem">' +
+      '<div class="result-icon"><i class="ti ' + icon + '" style="color:' + color + '"></i></div>' +
+      '<div class="result-title">' + title + '</div>' +
+      '<div class="result-sub">' + sub + '</div>' +
+      '<div class="stats-grid">' +
+        '<div class="stat"><div class="stat-n" style="color:var(--green-border)">' + score + '/3</div><div class="stat-l">Correctas</div></div>' +
+        '<div class="stat"><div class="stat-n" style="color:var(--purple-400)">' + fmt(elapsed) + '</div><div class="stat-l">Tiempo</div></div>' +
+        '<div class="stat"><div class="stat-n" style="color:#BA7517">' + Math.round((score / 3) * 100) + '%</div><div class="stat-l">Acierto</div></div>' +
+      '</div>' +
+      '<div class="action-row">' +
+        '<button class="btn-outline" onclick="retryQuiz()">Nueva combinación</button>' +
+        '<button class="btn-secondary" onclick="state=\'leaderboard\';render()">Ver ranking</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function renderLeaderboard(m) {
+  var lb = getLb();
+  var rows = lb.length === 0
+    ? '<div class="no-entries">Todavía nadie ha jugado. ¡Sé el primero!</div>'
+    : lb.map(function(e, i) {
+        var me = i === myEntryIdx ? ' me' : '';
+        return '<div class="lb-row' + me + '">' +
+          '<div class="lb-rank">' + (i + 1) + '</div>' +
+          '<div class="lb-name">' + e.name + (e.score === 3 ? '<span class="lb-badge">16%</span>' : '') + '</div>' +
+          '<div class="lb-score">' + e.score + '/3</div>' +
+          '<div class="lb-time">' + fmt(e.secs) + '</div>' +
+        '</div>';
+      }).join('');
+
+  m.innerHTML =
+    '<div class="card">' +
+      '<div class="lb-title"><i class="ti ti-trophy" style="font-size:16px;color:#BA7517"></i>Ranking — ¿Quién es del 16%?</div>' +
+      rows +
+    '</div>' +
+    '<div class="action-row">' +
+      '<button class="btn-outline" onclick="retryQuiz()">Jugar de nuevo</button>' +
+      '<button class="btn-secondary" onclick="state=\'result\';render()">Mi resultado</button>' +
+    '</div>';
+}
+
+function retryQuiz() {
+  current = 0; score = 0; answered = false; elapsed = 0;
+  playerName = ''; myEntryIdx = -1;
+  state = 'name';
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
